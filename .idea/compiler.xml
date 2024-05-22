@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ms-prices" />
+        <module name="ms-repairs" />
         <module name="config-server" />
         <module name="gateway-server" />
         <module name="ms-cars" />
@@ -22,6 +23,7 @@
       <module name="gateway-server" options="-parameters" />
       <module name="ms-cars" options="-parameters" />
       <module name="ms-prices" options="-parameters" />
+      <module name="ms-repairs" options="-parameters" />
     </option>
   </component>
 </project>

@@ -29,3 +29,7 @@ spring:
           uri: lb://ms-prices:8091
           predicates:
             - Path=/prices/**
+        - id: ms-repairs
+          uri: lb://ms-repairs:8092
+          predicates:
+            - Path=/repairs/**
