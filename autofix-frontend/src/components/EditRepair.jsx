@@ -35,6 +35,17 @@ const EditRepair = () => {
 
   const navigate = useNavigate();
 
+  const handleSurcharges = () => {
+    //repairService.
+    repairService
+        .addfinalprice(id)
+        .then((response) => {
+          console.log("Surcharges Added.", response.data);   
+        })
+        .catch((error) => {
+          console.log("An error ocurred while trying to update repair.", error);
+        });
+  };
   const saveRepair = (e) => {
     e.preventDefault();
 
@@ -55,7 +66,7 @@ const EditRepair = () => {
       surchMileage,
       surchDelay,
       checkinDate,
-      finishDate: finishDate,
+      finishDate,
       checkoutDate,
       iva,
       totalAmount,
@@ -66,6 +77,7 @@ const EditRepair = () => {
         .update(repair)
         .then((response) => {
           console.log("Repair ha sido actualizado.", response.data);
+          handleSurcharges();
           navigate("/repair/list");
         })
         .catch((error) => {
@@ -78,6 +90,7 @@ const EditRepair = () => {
         .create(repair)
         .then((response) => {
           console.log("Repair has been added.", response.data);
+          handleSurcharges();
           navigate("/repair/list");
         })
         .catch((error) => {
@@ -88,7 +101,7 @@ const EditRepair = () => {
           );
         });
     }
-    repairService.addfinalprice(id);
+    //handleSurcharges();
   };
 
   useEffect(() => {

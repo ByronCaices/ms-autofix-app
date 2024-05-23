@@ -203,6 +203,12 @@ public class RepairService {
 
         repair.setTotalAmount(fpartialTotal);
 
+        // noes null
+        //if (repair.getCheckoutDate() != null) {
+        //    System.out.println("CHECKOUT DATE NO ES NULL");
+        //    repair = this.addSurchPickupDelay(repair.getId());
+        //}
+
         return repairRepository.save(repair);
     }
 
@@ -218,27 +224,12 @@ public class RepairService {
 
     public RepairEntity addSurchPickupDelay(Long id) {
 
+        System.out.println("Adding surcharge pickup delay");
+
         RepairEntity repair = this.getById(id);
-        float disc_bonus = 0.0f;
-        /*
-        System.out.println("BBBBBBBBBBB brand: " + repair.getBrand());
-        if (discountBonusService.getStockByBrand(repair.getBrand()) <= 0) {
-            System.out.println("No hay stock de descuento por marca");
-            //repair.setDiscBonus(0.0f);
-            //disc_bonus = 0.0f;
-        } else {
-            disc_bonus = discountBonusService.getBonusByBrand(repair.getBrand());
-            if (disc_bonus != 0) {
-                discountBonusService.decreaseStockByBrand(repair.getBrand());
-            }
-            //repair.setDiscBonus(disc_bonus); // not a percentage
-        }
-
-         */
-
+        System.out.println(repair.toString());
         float repairPrice = repair.getRepairPrice();
         float disc_reg_client = repair.getDiscRegClient();
-        //float disc_bonus = repair.getDiscBonus();
         float disc_mon_thu = repair.getDiscMonThu();
         float surchargeCarAge = repair.getSurchCarage();
         float surchargeCarMileage = repair.getSurchMileage();
@@ -269,10 +260,6 @@ public class RepairService {
 
         // int finalTotal = (int) partialTotal;
         repair.setTotalAmount(partialTotal);
-
-        // close order
-        //orderService.saveOrder(new OrderEntity(repair.getRepairCode(), repair.getPlate(), repair.getEngine(),
-        //        repair.getBodywork(), disc_bonus, repair.getTotalAmount()));
 
         return repairRepository.save(repair);
     }

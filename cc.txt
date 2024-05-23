@@ -1,0 +1,2 @@
+minikube start --driver=hyperv
+172.18.84.39
