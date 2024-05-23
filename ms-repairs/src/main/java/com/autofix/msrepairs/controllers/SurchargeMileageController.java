@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/repairs/surchmileages")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class SurchargeMileageController {
     @Autowired
     SurchargeMileageService surchargeMileageService;

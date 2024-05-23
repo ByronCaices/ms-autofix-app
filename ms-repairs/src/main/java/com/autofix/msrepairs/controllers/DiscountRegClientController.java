@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/repairs/discregclients")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class DiscountRegClientController {
     @Autowired
     DiscountRegClientService discountRegClientService;

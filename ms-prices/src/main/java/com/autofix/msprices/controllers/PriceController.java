@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/prices")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class PriceController {
     @Autowired
     PriceService priceService;

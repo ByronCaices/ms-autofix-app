@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/repairs/discbonus")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class DiscountBonusController {
     @Autowired
     DiscountBonusService discountBonusService;
