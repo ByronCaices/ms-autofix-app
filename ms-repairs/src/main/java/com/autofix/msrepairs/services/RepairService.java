@@ -2,8 +2,9 @@ package com.autofix.msrepairs.services;
 
 import com.autofix.msrepairs.clients.CarsFeignClient;
 import com.autofix.msrepairs.clients.PricesFeignClient;
-import com.autofix.msrepairs.models.CarEntity;
 import com.autofix.msrepairs.entities.RepairEntity;
+import com.autofix.msrepairs.models.CarEntity;
+import com.autofix.msrepairs.models.updtMileageModel;
 import com.autofix.msrepairs.repositories.RepairRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -167,7 +168,8 @@ public class RepairService {
         String categoryMA;
         Long carMileage = repair.getMileage(); // Mileage value comes from frontend and next its updated in the car
                                                // entity
-        //carsFeignClient.updateMileage(repair.getPlate(), repair.getMileage()); // Update car mileage on car table
+
+        carsFeignClient.updateMileage(new updtMileageModel(repair.getPlate(), repair.getMileage())); // Update car mileage on car table
         if (carMileage >= 0 && carMileage <= 5000) {
             categoryMA = "A";
         } else if (carMileage > 5000 && carMileage <= 12000) {

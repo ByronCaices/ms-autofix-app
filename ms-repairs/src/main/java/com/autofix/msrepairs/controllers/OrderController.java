@@ -1,13 +1,13 @@
 package com.autofix.msrepairs.controllers;
 
-import com.example.demo.entities.OrderEntity;
-import com.example.demo.services.OrderService;
+import com.autofix.msrepairs.entities.OrderEntity;
+import com.autofix.msrepairs.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/orders")
+@RequestMapping("/repairs/orders")
 @CrossOrigin("*")
 public class OrderController {
     @Autowired

@@ -1,7 +1,9 @@
 package com.autofix.mscar.controllers;
 import com.autofix.mscar.entities.CarEntity;
 import com.autofix.mscar.services.CarService;
+import com.autofix.mscar.models.updtMileageModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +27,17 @@ public class CarController {
     public ResponseEntity<CarEntity> getCarByPlate(@PathVariable String plate) {
         CarEntity car = carService.getCarByPlate(plate);
         return ResponseEntity.ok(car);
+    }
+
+    @PostMapping("/updateMileage")
+    public ResponseEntity<String> updateMileage(@RequestBody updtMileageModel updtMileage){
+        String plate = updtMileage.getPlate();
+        Long mileage = updtMileage.getMileage();
+        carService.updateMileage(plate,mileage);
+        return new ResponseEntity<>(
+                "Mileage updated successfully!",
+                HttpStatus.OK
+        );
     }
 
 

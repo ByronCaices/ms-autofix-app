@@ -1,0 +1,26 @@
+pipeline{
+    agent any
+    stages{
+        stage("Build Frontend"){
+            steps{
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ByronCaices/autofix-app']])
+                dir("autofix-frontend"){
+                    sh "npm install"
+                    sh "npm run build"
+                }
+            }
+        }
+        stage("Build and Push Docker Image"){
+            steps{
+                dir("autofix-frontend"){
+                    script{
+                         withDockerRegistry(credentialsId: 'docker-credentials'){
+                            sh "docker build -t bcaices/react-image ."
+                            sh "docker push bcaices/react-image"
+                        }
+                    }                    
+                }
+            }
+        }
+    }
+}

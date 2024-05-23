@@ -1,11 +1,10 @@
 package com.autofix.msrepairs.clients;
 
 import com.autofix.msrepairs.models.CarEntity;
+import com.autofix.msrepairs.models.updtMileageModel;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @FeignClient(value = "ms-cars",
@@ -18,6 +17,8 @@ public interface CarsFeignClient {
     @GetMapping("/{plate}")
     public CarEntity getCarByPlate(@PathVariable String plate);
 
+    @PostMapping("/updateMileage")
+    public String updateMileage(@RequestBody updtMileageModel updtMileage);
 
     @PostMapping("/")
     public CarEntity saveCar(@RequestBody CarEntity car);

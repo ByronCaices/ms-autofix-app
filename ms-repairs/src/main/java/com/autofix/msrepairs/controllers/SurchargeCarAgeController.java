@@ -1,7 +1,7 @@
 package com.autofix.msrepairs.controllers;
 
-import com.example.demo.entities.SurchargeCarAgeEntity;
-import com.example.demo.services.SurchargeCarAgeService;
+import com.autofix.msrepairs.entities.SurchargeCarAgeEntity;
+import com.autofix.msrepairs.services.SurchargeCarAgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/surchcarages")
+@RequestMapping("/repairs/surchcarages")
 @CrossOrigin("*")
 public class SurchargeCarAgeController {
     @Autowired
