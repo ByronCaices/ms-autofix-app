@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config-map
+  labels:
+    app: postgres-config-map
+data:
+  DB_HOST_CARS: cars-db-service
+  DB_PORT_CARS: "5432"
+  DB_DBNAME_CARS: cars-db
+  DB_HOST_PRICES: prices-db-service
+  DB_PORT_PRICES: "5432"
+  DB_DBNAME_PRICES: prices-db
+  DB_HOST_REPAIRS: repairs-db-service
+  DB_PORT_REPAIRS: "5432"
+  DB_DBNAME_REPAIRS: repairs-db
+
+
