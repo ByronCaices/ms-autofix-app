@@ -1,0 +1,18 @@
+kubectl apply -f postgres-config-map.yaml
+kubectl get configmap
+kubectl apply -f postgres-secrets.yaml
+kubectl get secrets
+kubectl apply -f cars-db-deployment-service.yaml
+kubectl apply -f prices-db-deployment-services.yaml
+kubectl apply -f repairs-db-deployment-service.yaml
+kubectl get pods
+kubectl exec -it cars-db-deployment-9cf99647c-gp55n -- /bin/bash
+psql -U postgres
+create database "cars-db";
+
+kubectl cp prices-dump.sql prices-db-deployment-6df689bdb6-8mt94:/home
+kubectl exec -it prices-db-deployment-6df689bdb6-8mt94 -- /bin/bash
+
+kubectl cp repairs-dump.sql repairs-db-deployment-64c74674fb-hpxdn:/home
+kubectl exec -it repairs-db-deployment-64c74674fb-hpxdn -- /bin/bash
+psql -d "" -U postgres
