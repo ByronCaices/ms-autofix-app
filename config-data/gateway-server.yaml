@@ -1,8 +1,6 @@
 server:
   port: 8080
 eureka:
-  instance:
-    hostname: localhost
   client:
     fetch-registry: true
     register-with-eureka: true
@@ -14,22 +12,24 @@ spring:
       discovery:
         locator:
           enabled: true
+        default-filters:
+          - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: "*"
+            allowedOrigins: '*'
             allowedMethods: "*"
             allowedHeaders: "*"
       routes:
         - id: ms-cars
-          uri: lb://ms-cars:8090
+          uri: lb://ms-cars
           predicates:
             - Path=/cars/**
         - id: ms-prices
-          uri: lb://ms-prices:8091
+          uri: lb://ms-prices
           predicates:
             - Path=/prices/**
         - id: ms-repairs
-          uri: lb://ms-repairs:8092
+          uri: lb://ms-repairs
           predicates:
             - Path=/repairs/**
