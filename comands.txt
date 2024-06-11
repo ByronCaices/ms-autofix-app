@@ -16,3 +16,7 @@ kubectl exec -it prices-db-deployment-6df689bdb6-8mt94 -- /bin/bash
 kubectl cp repairs-dump.sql repairs-db-deployment-64c74674fb-hpxdn:/home
 kubectl exec -it repairs-db-deployment-64c74674fb-hpxdn -- /bin/bash
 psql -d "" -U postgres
+
+
+kubectl get deployments
+kubectl delete deployment eureka-server-deployment
