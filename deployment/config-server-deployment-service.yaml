@@ -15,10 +15,10 @@ spec:
         app: config-server-deployment
     spec:
       containers:
-        - name: config-server
-          image: bcaices/config-server
-          ports:
-            - containerPort: 8888
+      - name: config-server
+        image: bcaices/config-server
+        ports:
+          - containerPort: 8888
 ---
 apiVersion: v1
 kind: Service
