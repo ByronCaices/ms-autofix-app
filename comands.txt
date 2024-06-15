@@ -20,3 +20,5 @@ psql -d "" -U postgres
 
 kubectl get deployments
 kubectl delete deployment eureka-server-deployment
+
+kubectl port-forward GT 57633:8080
