@@ -3,6 +3,7 @@ package com.autofix.msreports.controllers;
 import com.autofix.msreports.services.ReportsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,11 @@ public class ReportsController {
     @GetMapping("/repairTypeAmounts")
     public List<Object[]> getRepairTypeAmounts() {
         return reportsService.getRepairTypeAmounts();
+    }
+
+    @GetMapping("/MonthlyReport/{month}")
+    public List<Object[]> getMonthlyRepairReport(@PathVariable String month) {
+        return reportsService.getMonthlyRepairReport(month);
     }
 
 }

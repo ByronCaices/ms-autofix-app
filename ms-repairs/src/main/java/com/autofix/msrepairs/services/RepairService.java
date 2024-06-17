@@ -303,4 +303,8 @@ public class RepairService {
         return repairRepository.sumTotalAmountByRepairCode(repair_code);
     }
 
+    public List<Object[]> getMonthlyRepairReport(String month) {
+        return repairRepository.getMonthlyRepairReport(month);
+    }
+
 }

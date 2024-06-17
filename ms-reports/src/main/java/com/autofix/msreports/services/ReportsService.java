@@ -15,4 +15,8 @@ public class ReportsService {
     public List<Object[]> getRepairTypeAmounts() {
         return repairsFeignClient.getRepairTypeAmounts();
     }
+
+    public List<Object[]> getMonthlyRepairReport(String month) {
+        return repairsFeignClient.getMonthlyRepairReport(month);
+    }
 }

@@ -58,8 +58,94 @@ public interface RepairRepository extends JpaRepository<RepairEntity,Long> {
             nativeQuery = true)
     public List<Object[]> getAverageRepairTimeByBrand();
 
+    @Query(value = """
+        WITH meses AS (
+            SELECT
+                date_trunc('month', CAST(:month AS TIMESTAMP) - INTERVAL '2 months') AS start_month,
+                date_trunc('month', CAST(:month AS TIMESTAMP) + INTERVAL '1 month') AS end_month
+        ),
+        aggregated_data AS (
+            SELECT
+                to_char(r.checkin_date, 'Month') AS report_month,
+                r.repair_type,
+                COUNT(r.id) AS num_repairs,
+                SUM(r.total_amount) AS total_amount
+            FROM
+                repairs r
+            WHERE
+                r.checkin_date >= (SELECT start_month FROM meses)
+                AND r.checkin_date < (SELECT end_month FROM meses)
+            GROUP BY
+                to_char(r.checkin_date, 'Month'),
+                r.repair_type
+        ),
+        monthly_changes AS (
+            SELECT
+                ad.report_month,
+                ad.repair_type,
+                ad.num_repairs,
+                LAG(ad.num_repairs, 1) OVER (PARTITION BY ad.repair_type ORDER BY to_date(ad.report_month, 'Month')) AS prev_month_repairs,
+                ad.total_amount,
+                LAG(ad.total_amount, 1) OVER (PARTITION BY ad.repair_type ORDER BY to_date(ad.report_month, 'Month')) AS prev_month_amount
+            FROM
+                aggregated_data ad
+        )
+        SELECT
+            mc.report_month,
+            mc.repair_type,
+            mc.num_repairs,
+            COALESCE(((mc.num_repairs - mc.prev_month_repairs) / NULLIF(mc.prev_month_repairs, 0)::float), 0) AS month_on_month_repair_change,
+            mc.total_amount,
+            COALESCE(((mc.total_amount - mc.prev_month_amount) / NULLIF(mc.prev_month_amount, 0)::float), 0) AS month_on_month_amount_change
+        FROM
+            monthly_changes mc
+        ORDER BY
+            to_date(mc.report_month, 'Month') ASC
+        """, nativeQuery = true)
+    List<Object[]> getMonthlyRepairReport2(@Param("month") String month);
 
-
-
-
+    @Query(value = """
+    WITH meses AS (
+        SELECT
+            date_trunc('month', CAST(:month AS TIMESTAMP) - INTERVAL '2 months') AS start_month,
+            date_trunc('month', CAST(:month AS TIMESTAMP) + INTERVAL '1 month') AS end_month
+    ),
+    aggregated_data AS (
+        SELECT
+            to_char(r.checkin_date, 'Month') AS report_month,
+            r.repair_type,
+            COUNT(r.id) AS num_repairs,
+            SUM(r.total_amount) AS total_amount
+        FROM
+            repairs r
+        WHERE
+            r.checkin_date >= (SELECT start_month FROM meses)
+            AND r.checkin_date < (SELECT end_month FROM meses)
+        GROUP BY
+            to_char(r.checkin_date, 'Month'), r.repair_type
+    ),
+    monthly_changes AS (
+        SELECT
+            ad.report_month,
+            ad.repair_type,
+            ad.num_repairs,
+            LAG(ad.num_repairs, 1) OVER (PARTITION BY ad.repair_type ORDER BY to_date(ad.report_month, 'Month')) AS prev_month_repairs,
+            ad.total_amount,
+            LAG(ad.total_amount, 1) OVER (PARTITION BY ad.repair_type ORDER BY to_date(ad.report_month, 'Month')) AS prev_month_amount
+        FROM
+            aggregated_data ad
+    )
+    SELECT
+        mc.report_month,
+        mc.repair_type,
+        mc.num_repairs,
+        COALESCE(CAST((mc.num_repairs - mc.prev_month_repairs) AS FLOAT) / NULLIF(CAST(mc.prev_month_repairs AS FLOAT), 0), 0) AS month_on_month_repair_change,
+        mc.total_amount,
+        COALESCE(CAST((mc.total_amount - mc.prev_month_amount) AS FLOAT) / NULLIF(CAST(mc.prev_month_amount AS FLOAT), 0), 0) AS month_on_month_amount_change
+    FROM
+        monthly_changes mc
+    ORDER BY
+        to_date(mc.report_month, 'Month') ASC
+    """, nativeQuery = true)
+    List<Object[]> getMonthlyRepairReport(@Param("month") String month);
 }
