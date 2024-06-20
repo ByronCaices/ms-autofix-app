@@ -13,6 +13,7 @@ import NoteAddRoundedIcon from "@mui/icons-material/NoteAddRounded";
 import AlarmOnRoundedIcon from "@mui/icons-material/AlarmOnRounded";
 import CarRepairRoundedIcon from "@mui/icons-material/CarRepairRounded";
 import PrecisionManufacturingOutlinedIcon from "@mui/icons-material/PrecisionManufacturingOutlined";
+import InsightsRoundedIcon from '@mui/icons-material/InsightsRounded';
 import { useNavigate } from "react-router-dom";
 
 export default function Sidemenu({ open, toggleDrawer }) {
@@ -72,6 +73,13 @@ export default function Sidemenu({ open, toggleDrawer }) {
             <AnalyticsIcon />
           </ListItemIcon>
           <ListItemText primary="Repair Type By Engine" />
+        </ListItemButton>
+
+        <ListItemButton onClick={() => navigate("/report/variation")}>
+          <ListItemIcon>
+            <InsightsRoundedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Monthly Variation" />
         </ListItemButton>
       </List>
 

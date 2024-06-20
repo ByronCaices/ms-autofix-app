@@ -8,7 +8,7 @@ const autofixBASEURL = `http://autofix-app-bcaices.brazilsouth.cloudapp.azure.co
 //console.log(autofixBackendPort)
 
 export default axios.create({
-    baseURL: `http://127.0.0.1:57633`,
+    baseURL: `http://localhost:8080`, //http://127.0.0.1:57633
     headers: {
         'Content-Type': 'application/json'
     }

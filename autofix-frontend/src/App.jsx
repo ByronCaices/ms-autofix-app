@@ -15,6 +15,7 @@ import AddCar from "./components/AddCar";
 import RepTypeBodywork from "./components/RepTypeBodywork";
 import RepTypeEngine from "./components/RepTypeEngine";
 import RepAvgRepairTime from "./components/RepAvgRepairTime";
+import ReportVar from "./components/ReportVariation";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="/report/type&bodywork" element={<RepTypeBodywork />} />
           <Route path="/report/type&engine" element={<RepTypeEngine />} />
           <Route path="/report/avgRepairTime" element={<RepAvgRepairTime />} />
+          <Route path="/report/variation" element={<ReportVar />} />
         </Routes>
       </div>
     </Router>
