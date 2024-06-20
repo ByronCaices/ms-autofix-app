@@ -58,6 +58,12 @@ public class RepairController {
         return ResponseEntity.ok(averageRepairTimeByBrand);
     }
 
+    @GetMapping("/MonthlyReport/{month}")
+    public ResponseEntity<List<Object[]>> getMonthlyRepairReport(@PathVariable String month) {
+        List<Object[]> monthlyReport = repairService.getMonthlyRepairReport(month);
+        return ResponseEntity.ok(monthlyReport);
+    }
+
     @PostMapping("/")
     public ResponseEntity<RepairEntity> saveRepair(@RequestBody RepairEntity repair){
         RepairEntity repairUpdated = repairService.saveRepair(repair); //Agrega los datos faltantes al repair sobre precios y descuentos

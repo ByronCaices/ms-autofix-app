@@ -1,0 +1,29 @@
+INSERT INTO tu_tabla (
+    "id", "bodywork", "brand", "checkin_date", "checkout_date", "disc_bonus",
+    "disc_mon_thu", "disc_reg_client", "engine", "finish_date", "iva", "mileage",
+    "plate", "repair_code", "repair_price", "repair_type", "surch_carage",
+    "surch_delay", "surch_mileage", "total_amount"
+)
+SELECT
+    32 + s.a,
+    'van',
+    'Chevrolet',
+    checkin_date,
+    checkin_date + interval '5 days',
+    0,
+    0,
+    0,
+    'gas',
+    checkin_date + interval '3 days',
+    round((120000 + s.a * 10000) * 0.21),
+    3500,
+    'HHHH88',
+    'HHHH883500',
+    120000 + s.a * 10000,
+    floor(random() * 11 + 1)::int,
+    0,
+    12000 + s.a * 1000,
+    0,
+    round((120000 + s.a * 10000) * 1.21) + 12000 + s.a * 1000
+FROM generate_series(0, 11) AS s(a),
+     generate_series('2024-01-23 16:13:00'::timestamp, '2024-03-23 16:13:00', '1 month') AS d(checkin_date);
