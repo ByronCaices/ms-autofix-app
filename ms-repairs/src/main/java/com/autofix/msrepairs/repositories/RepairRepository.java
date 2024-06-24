@@ -145,7 +145,7 @@ public interface RepairRepository extends JpaRepository<RepairEntity,Long> {
     FROM
         monthly_changes mc
     ORDER BY
-        to_date(mc.report_month, 'Month') ASC
+        to_date(mc.report_month, 'Month') ASC, repair_type ASC
     """, nativeQuery = true)
     List<Object[]> getMonthlyRepairReport(@Param("month") String month);
 }

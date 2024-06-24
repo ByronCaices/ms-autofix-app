@@ -44,6 +44,14 @@ const getReportAvgTime = () => {
     return httpClient.get('/repairs/averageRepairTimeByBrand')
 }
 
+const getReportVar = () => {
+    return httpClient.get('/reports/MonthlyReport/2024-03-01')
+}
+
+const getReportVariation = selectedDate => {
+    return httpClient.get(`/reports/MonthlyReport/${selectedDate}`)
+}
 
 
-export default { getAll, getByCode, getById, create, update, remove, addfinalprice, getTotalAmount, getReportBodywork, getReportEngine, getReportAvgTime}
+
+export default { getAll, getByCode, getById, create, update, remove, addfinalprice, getTotalAmount, getReportBodywork, getReportEngine, getReportAvgTime, getReportVar, getReportVariation}
