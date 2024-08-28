@@ -30,7 +30,7 @@ El proyecto ha sido desarrollado utilizando una arquitectura de microservicios, 
   - Los microservicios implementan los patrones de **ConfigServer**, **Service Discovery (Eureka Server)**, y **API Gateway**.
 - **Herramienta de Desarrollo:** IntelliJ o Visual Studio Code.
 
-### 3. Despliegue en Producción
+### 3. Despliegue
 
 - **Tecnologías Utilizadas:**
   - **Docker:** Todos los microservicios del backend y el frontend son empaquetados en contenedores Docker independientes y almacenados en Docker Hub.
@@ -45,18 +45,4 @@ El proyecto ha sido desarrollado utilizando una arquitectura de microservicios, 
 - **Docker y Docker Compose**: Para crear y gestionar los contenedores de los servicios.
 - **Kubernetes**: Para el despliegue y la orquestación de los contenedores en producción.
 
-## Instrucciones de Instalación y Ejecución
-
-1. Clona este repositorio en tu máquina local.
-2. Sigue las instrucciones en el archivo `docker-compose.yml` para construir y ejecutar los contenedores Docker.
-3. Utiliza Kubernetes para desplegar la aplicación en un entorno de producción.
-4. Accede a la aplicación web desde tu navegador preferido.
-
-## Contribuciones
-
-Las contribuciones son bienvenidas. Si deseas contribuir, por favor sigue los lineamientos de contribución y haz un pull request.
-
-## Licencia
-
-Este proyecto está licenciado bajo los términos de la [Licencia MIT](LICENSE).
 
